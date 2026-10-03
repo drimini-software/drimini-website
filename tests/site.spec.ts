@@ -49,8 +49,8 @@ test("the work pages distinguish self-initiated proof from client outcomes", asy
   await page.goto("/work");
 
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Work we can show honestly.");
-  await expect(page.getByText("This is our own work, not a borrowed client story.")).toBeVisible();
-  await page.getByRole("link", { name: "Read the case study" }).click();
+  await expect(page.getByText(/These are our own projects, not borrowed client stories/)).toBeVisible();
+  await page.getByRole("link", { name: "Read website case study" }).click();
 
   await expect(page).toHaveURL(/\/work\/drimini-website\/?$/);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
@@ -62,6 +62,29 @@ test("the work pages distinguish self-initiated proof from client outcomes", asy
   await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
     "content",
     "https://drimini.com/brand/drimini-website-case-study-og.png",
+  );
+});
+
+test("Release Evidence is presented as experimental work", async ({ page }) => {
+  await page.goto("/work");
+
+  await expect(page.getByRole("heading", { name: "Release Evidence" })).toBeVisible();
+  await expect(page.getByText("Independent validation pending")).toBeVisible();
+  await page.getByRole("link", { name: "Explore Release Evidence" }).click();
+
+  await expect(page).toHaveURL(/\/work\/release-evidence\/?$/);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "Making release evidence reviewable.",
+  );
+  await expect(page.getByText("This is a working experiment.")).toBeVisible();
+  await expect(page.getByText(/What this does not prove: independent demand/)).toBeVisible();
+  await expect(page.getByRole("link", { name: "View source on GitHub" })).toHaveAttribute(
+    "href",
+    "https://github.com/drimini-software/release-evidence",
+  );
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
+    "content",
+    "https://drimini.com/brand/release-evidence-og.png",
   );
 });
 
@@ -135,6 +158,18 @@ test("the case study does not overflow a narrow viewport", async ({ page }) => {
   expect(viewport.documentWidth).toBeLessThanOrEqual(viewport.viewportWidth);
 });
 
+test("the Release Evidence page does not overflow a narrow viewport", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/work/release-evidence");
+
+  const viewport = await page.evaluate(() => ({
+    documentWidth: document.documentElement.scrollWidth,
+    viewportWidth: window.innerWidth,
+  }));
+
+  expect(viewport.documentWidth).toBeLessThanOrEqual(viewport.viewportWidth);
+});
+
 test("an unknown route returns the designed 404 page", async ({ page }) => {
   const response = await page.goto("/this-page-does-not-exist");
 
@@ -172,6 +207,7 @@ for (const route of [
   "/",
   "/work",
   "/work/drimini-website",
+  "/work/release-evidence",
   "/contact",
   "/contact/sent",
   "/contact/problem",

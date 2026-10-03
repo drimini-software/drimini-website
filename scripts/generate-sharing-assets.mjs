@@ -24,6 +24,13 @@ const cards = [
     footer: "Astro · Cloudflare Pages + D1 · WCAG checks",
     note: "drimini.com/work",
   },
+  {
+    file: "release-evidence-og.png",
+    eyebrow: "Experimental open-source project",
+    title: "Release evidence.|Keep the decision human.",
+    footer: "Local-first · Deterministic · Apache-2.0",
+    note: "drimini.com/work",
+  },
 ];
 
 const browser = await chromium.launch();

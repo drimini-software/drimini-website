@@ -12,13 +12,13 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       <h1>Work we can show honestly.</h1>
     </div>
     <p>
-      Drimini is new. This is our own work, not a borrowed client story. We are
-      publishing it because the reasoning and implementation are inspectable now.
+      Drimini is new. These are our own projects, not borrowed client stories. We
+      publish them because the reasoning, implementation, and limits are inspectable.
     </p>
   </header>
 
   <section class="work-index shell" aria-labelledby="work-index-title">
-    <h2 class="visually-hidden" id="work-index-title">Available case studies</h2>
+    <h2 class="visually-hidden" id="work-index-title">Available projects</h2>
     <article class="work-card work-card--large">
       <div class="work-card__meta">
         <span>Self-initiated</span>
@@ -41,7 +41,34 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         <li>Automated accessibility checks</li>
       </ul>
       <a class="work-card__link" href="/work/drimini-website">
-        Read the case study <span aria-hidden="true">→</span>
+        Read website case study <span aria-hidden="true">→</span>
+      </a>
+    </article>
+
+    <article class="work-card work-card--large work-card--experiment">
+      <div class="work-card__meta">
+        <span>Experimental / Open source</span>
+        <span>Preview / 2026</span>
+      </div>
+      <div class="work-card__body">
+        <div>
+          <p class="work-card__kicker">Release + handover tooling</p>
+          <h3>Release Evidence</h3>
+        </div>
+        <p>
+          A local-first workbench that scans repository evidence, keeps machine
+          observations separate from human judgment, and leaves the release
+          decision with its owner.
+        </p>
+      </div>
+      <ul class="work-card__facts" aria-label="Project highlights">
+        <li>Go + local web interface</li>
+        <li>Offline by default</li>
+        <li>Apache-2.0 source</li>
+        <li>Independent validation pending</li>
+      </ul>
+      <a class="work-card__link" href="/work/release-evidence">
+        Explore Release Evidence <span aria-hidden="true">→</span>
       </a>
     </article>
   </section>

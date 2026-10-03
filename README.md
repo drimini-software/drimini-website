@@ -18,11 +18,13 @@ information architecture is in `structure.md`, and provisional visual and copy
 choices are in `design-v1.md`. Deployment, inbox operation, failure handling,
 and rollback are in `RUNBOOK.md`.
 
-The public Work section contains one deliberately labeled self-initiated case
-study at `/work/drimini-website`. It explains the website's decisions and
-verified operating evidence without presenting the build as client work. The
-default and case-study Open Graph cards live in `public/brand/` and are generated
-from the existing SVG mark and website design tokens.
+The Work section contains two deliberately labeled self-initiated projects. The
+website case study at `/work/drimini-website` explains verified operating
+evidence without presenting the build as client work. The Release Evidence page
+at `/work/release-evidence` presents its public source preview as experimental
+work with independent validation still pending. The default and project Open
+Graph cards live in `public/brand/` and are generated from the existing SVG mark
+and website design tokens.
 
 Versions are pinned in `package.json` and `pnpm-lock.yaml`. `drimini.com` is
 owned, added to Cloudflare, and configured as the site's canonical origin. The

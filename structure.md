@@ -25,8 +25,9 @@ testimonials, team profiles, or partner logos.
 | `/contact` | Collect a focused project enquiry and report delivery state | Build now |
 | `404` | Recover visitors with one clear route home | Build now |
 | `/privacy` | Explain form collection, use, retention, and visitor choices | Build now |
-| `/work` | Index verified, honestly labeled work | Published with one self-initiated project |
+| `/work` | Index verified, honestly labeled work | Published; second project prepared locally |
 | `/work/drimini-website` | Explain the decisions and evidence behind Drimini's website | Published |
+| `/work/release-evidence` | Present the experimental source preview and its limits | Prepared locally |
 
 Do not create empty About, Team, Services, Careers, Blog, or Work pages to make
 the company appear larger. Add a route when it has useful, verified content.
@@ -122,9 +123,10 @@ established specialization.
 
 ### 6. Work we can show
 
-Link to the website case study as self-initiated work. Keep the distinction from
-client work prominent and describe only inspectable decisions, implementation,
-and operations. Do not translate an internal result into a customer outcome.
+Link to the website case study as live self-initiated work and Release Evidence
+as an experimental open-source project. Keep both distinct from client work.
+Describe only inspectable decisions, implementation, operations, and validation
+status; do not translate an internal result into a customer outcome.
 
 ### 7. Closing contact invitation
 
@@ -204,11 +206,17 @@ for two mostly static pages.
 
 ## Work routes
 
-The initial work index contains one case study: Drimini's own website and
-contact system. It must remain labeled **self-initiated** and must not imply a
-client relationship. The case study can report verified architecture,
-operational checks, accessibility testing, and live status. It must also state
-that these do not prove client results, market demand, or unobserved scale.
+The work index contains two self-initiated projects and must not imply a client
+relationship:
+
+- Drimini's website and contact system is a live case study. It can report
+  verified architecture, operational checks, accessibility testing, and live
+  status, while stating that these do not prove client results, market demand,
+  or unobserved scale.
+- Release Evidence is an experimental open-source project. It can report the
+  working scanner and local review workflow, repository link, privacy boundary,
+  and automated checks, while stating that independent validation, stable
+  releases, product demand, and commercial availability remain absent.
 
 ## Launch checks
 

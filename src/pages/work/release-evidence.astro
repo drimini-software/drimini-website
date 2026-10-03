@@ -1,0 +1,158 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const repositoryURL = "https://github.com/drimini-software/release-evidence";
+const projectFacts = [
+  ["Project", "Release Evidence"],
+  ["Status", "Experimental source preview"],
+  ["Published", "October 2026"],
+  ["Stack", "Go, TypeScript, local web UI"],
+];
+---
+
+<BaseLayout
+  title="Release Evidence experimental project"
+  description="Release Evidence is Drimini's experimental local-first workbench for reviewing repository evidence and human release decisions."
+  image="/brand/release-evidence-og.png"
+  imageAlt="Release Evidence — an experimental local-first project by Drimini."
+  ogType="article"
+>
+  <article class="case-study">
+    <header class="case-hero shell">
+      <div class="case-hero__copy">
+        <p class="eyebrow">Project / Experimental open source</p>
+        <h1>Making release evidence reviewable.</h1>
+        <p class="case-hero__lede">
+          Release Evidence examines one local software repository and helps a
+          technical owner assemble the facts and human judgments behind a release
+          or handover decision.
+        </p>
+      </div>
+      <aside class="case-disclosure" aria-label="Project disclosure">
+        <strong>This is a working experiment.</strong>
+        <p>
+          The scanner and local review workflow work. Independent target-user
+          validation is still pending.
+        </p>
+      </aside>
+    </header>
+
+    <dl class="case-facts shell">
+      {projectFacts.map(([term, detail]) => (
+        <div>
+          <dt>{term}</dt>
+          <dd>{detail}</dd>
+        </div>
+      ))}
+    </dl>
+
+    <section class="case-section shell" aria-labelledby="evidence-problem-title">
+      <div class="case-section__label">
+        <span>00</span>
+        <p>The problem</p>
+      </div>
+      <div class="case-section__content">
+        <h2 id="evidence-problem-title">The decision is one moment. Its evidence is everywhere.</h2>
+        <p>
+          Build definitions, tests, ownership, deployment notes, recovery guidance,
+          and security reporting often live in different files and different
+          people's heads. The accountable person still has to work out what was
+          observed, what was not found, what remains unknown, and who owns the gap.
+        </p>
+      </div>
+    </section>
+
+    <section class="case-loop" aria-labelledby="evidence-loop-title">
+      <div class="shell">
+        <div class="case-loop__heading">
+          <p class="eyebrow">The working loop</p>
+          <h2 id="evidence-loop-title">Scan. Review. Preserve.</h2>
+        </div>
+        <ol>
+          <li>
+            <span>01 / Scan</span>
+            <h3>Observe a bounded repository.</h3>
+            <p>
+              Deterministic checks inspect supported local files, cite what they
+              find, and explain the search behind evidence they do not observe.
+              The default path makes no network request.
+            </p>
+          </li>
+          <li>
+            <span>02 / Review</span>
+            <h3>Keep judgment visibly human.</h3>
+            <p>
+              A loopback-only interface separates observed, not observed,
+              unknown, and not applicable states. The reviewer can add context,
+              ownership, rationale, and follow-up actions.
+            </p>
+          </li>
+          <li>
+            <span>03 / Preserve</span>
+            <h3>Leave a traceable packet.</h3>
+            <p>
+              Review state is saved separately from the scanned repository, with
+              machine observations and manual assessment kept distinct for the
+              person making the decision.
+            </p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="case-section shell" aria-labelledby="evidence-boundaries-title">
+      <div class="case-section__label">
+        <span>04</span>
+        <p>Boundaries by design</p>
+      </div>
+      <div class="case-section__content">
+        <h2 id="evidence-boundaries-title">Useful evidence without a fictional score.</h2>
+        <div class="case-decision-grid">
+          <div>
+            <h3>Local by default</h3>
+            <p>Repository contents stay on the operator's machine; telemetry and hosted accounts are not required.</p>
+          </div>
+          <div>
+            <h3>Observation, not assurance</h3>
+            <p>Finding a file does not prove a practice is effective, and missing evidence is not proof that it does not exist.</p>
+          </div>
+          <div>
+            <h3>No automated approval</h3>
+            <p>The tool does not produce a readiness score, certify compliance, or decide that a release is safe.</p>
+          </div>
+          <div>
+            <h3>Hostile input assumed</h3>
+            <p>The scanner does not execute repository content, follows bounded readers, and refuses escaping links.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-outcome" aria-labelledby="evidence-outcome-title">
+      <div class="shell case-outcome__grid">
+        <div>
+          <p class="eyebrow">What exists today</p>
+          <h2 id="evidence-outcome-title">Public code. Working workflow. Open question.</h2>
+        </div>
+        <div>
+          <p>
+            The scanner and local review slice are public under Apache-2.0 and run
+            from source. An internal founder baseline exposed workflow problems;
+            focused corrections now pass the automated suite.
+          </p>
+          <p class="case-outcome__limit">
+            What this does not prove: independent demand, external usability, a
+            safe release decision, or production support. There is no stable
+            binary release or commercial offering yet.
+          </p>
+          <div class="case-outcome__actions">
+            <a class="button button--primary" href={repositoryURL} target="_blank" rel="noreferrer">
+              View source on GitHub <span aria-hidden="true">↗</span>
+            </a>
+            <a class="text-link" href="/contact">Discuss the project <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
