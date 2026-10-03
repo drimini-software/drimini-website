@@ -1,0 +1,35 @@
+{
+  "name": "drimini-website",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.6.0",
+  "engines": {
+    "node": ">=24.0.0 <25"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "dev:cloudflare": "pnpm build && wrangler pages dev",
+    "build": "astro build",
+    "build:test": "astro build --mode test",
+    "preview": "astro preview",
+    "check": "astro check",
+    "check:functions": "wrangler pages functions build functions",
+    "assets:social": "node scripts/generate-sharing-assets.mjs",
+    "inbox": "node scripts/inbox.mjs",
+    "test": "pnpm build:test && pnpm test:functions && playwright test",
+    "test:functions": "node --test tests/contact-function.test.mjs tests/inbox-cli.test.mjs",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "astro": "7.3.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "@axe-core/playwright": "4.13.0",
+    "@playwright/test": "1.63.0",
+    "@types/node": "24.13.6",
+    "typescript": "6.0.3",
+    "wrangler": "4.141.0"
+  }
+}

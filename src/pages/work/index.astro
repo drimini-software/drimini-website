@@ -1,0 +1,57 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Work"
+  description="Verified Drimini work, with the decisions, constraints, and limitations left visible."
+>
+  <header class="page-intro shell">
+    <div>
+      <p class="eyebrow">Selected work</p>
+      <h1>Work we can show honestly.</h1>
+    </div>
+    <p>
+      Drimini is new. This is our own work, not a borrowed client story. We are
+      publishing it because the reasoning and implementation are inspectable now.
+    </p>
+  </header>
+
+  <section class="work-index shell" aria-labelledby="work-index-title">
+    <h2 class="visually-hidden" id="work-index-title">Available case studies</h2>
+    <article class="work-card work-card--large">
+      <div class="work-card__meta">
+        <span>Self-initiated</span>
+        <span>Live / 2026</span>
+      </div>
+      <div class="work-card__body">
+        <div>
+          <p class="work-card__kicker">Website + contact operations</p>
+          <h3>Drimini website and contact system</h3>
+        </div>
+        <p>
+          How we framed, built, hardened, and now operate Drimini's first public
+          product without inventing scale, proof, or a bigger company behind it.
+        </p>
+      </div>
+      <ul class="work-card__facts" aria-label="Project highlights">
+        <li>Astro static site</li>
+        <li>Cloudflare Pages + D1</li>
+        <li>Human-owned enquiry operations</li>
+        <li>Automated accessibility checks</li>
+      </ul>
+      <a class="work-card__link" href="/work/drimini-website">
+        Read the case study <span aria-hidden="true">→</span>
+      </a>
+    </article>
+  </section>
+
+  <section class="contact-callout" aria-labelledby="work-contact-title">
+    <div class="shell contact-callout__inner">
+      <p class="eyebrow">Your difficult bit</p>
+      <h2 id="work-contact-title">Need this level of ownership?</h2>
+      <p>Tell us what needs to work, what is getting in the way, and why it matters.</p>
+      <a class="button button--dark" href="/contact">Contact us <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+</BaseLayout>

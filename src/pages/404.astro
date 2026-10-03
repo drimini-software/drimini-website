@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Page not found"
+  description="The requested Drimini page could not be found."
+  bodyClass="not-found-page"
+  noIndex
+>
+  <section class="not-found shell">
+    <p class="eyebrow">Error 404 / loose end</p>
+    <p class="not-found__number" aria-hidden="true">404</p>
+    <h1>This bit is missing.</h1>
+    <p>The page may have moved, or it may not exist yet.</p>
+    <a class="button button--primary" href="/">Back to Drimini <span aria-hidden="true">↖</span></a>
+  </section>
+</BaseLayout>

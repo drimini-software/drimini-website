@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Generated build and tool output
+dist/
+.astro/
+.wrangler/
+test-results/
+playwright-report/
+coverage/
+_worker.bundle
+*.log
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+.dev.vars
+.dev.vars.*
+!.dev.vars.example
+
+# Local editor and operating-system files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

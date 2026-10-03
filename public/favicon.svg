@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Drimini</title>
+  <rect width="64" height="64" rx="12" fill="#f5efe5"/>
+  <path fill="#24122e" d="M15 10h39l-9 18H30l-7 10H4l14-17h21l5-11H15Z"/>
+  <path fill="#ff654f" d="M29 27h16l5-9h10L50 39H39l-7 15H8l12-20h17l4-7H29Z"/>
+</svg>

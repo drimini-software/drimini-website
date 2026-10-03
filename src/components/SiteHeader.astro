@@ -1,0 +1,20 @@
+---
+const isHome = Astro.url.pathname === "/";
+---
+
+<header class="site-header">
+  <div class="site-header__inner shell">
+    <a class="wordmark" href="/" aria-label="Drimini home">
+      <img class="wordmark__mark" src="/brand/drimini-mark-v2.svg" alt="" width="27" height="24" />
+      <span>Drimini</span>
+    </a>
+
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href={isHome ? "#work" : "/#work"}>What we build</a>
+      <a href={isHome ? "#process" : "/#process"}>How we work</a>
+      <a href="/work">Work</a>
+    </nav>
+
+    <a class="header-action" href="/contact">Contact us</a>
+  </div>
+</header>

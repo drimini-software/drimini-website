@@ -1,0 +1,13 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "drimini-website",
+  "compatibility_date": "2026-09-26",
+  "pages_build_output_dir": "./dist",
+  "d1_databases": [
+    {
+      "binding": "CONTACT_DB",
+      "database_name": "drimini-contact",
+      "database_id": "67683eb9-9eef-4990-8eb8-1b0047937fc3"
+    }
+  ]
+}

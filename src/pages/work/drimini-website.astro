@@ -1,0 +1,152 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const projectFacts = [
+  ["Project", "Drimini's own website"],
+  ["Status", "Live and operated"],
+  ["Released", "October 2026"],
+  ["Stack", "Astro, TypeScript, Cloudflare Pages, D1"],
+];
+---
+
+<BaseLayout
+  title="Drimini website case study"
+  description="How Drimini framed, built, hardened, and now operates its website and contact system."
+  image="/brand/drimini-website-case-study-og.png"
+  imageAlt="Case study: building Drimini's first website and contact system."
+  ogType="article"
+>
+  <article class="case-study">
+    <header class="case-hero shell">
+      <div class="case-hero__copy">
+        <p class="eyebrow">Case study / Self-initiated work</p>
+        <h1>Building Drimini's first website.</h1>
+        <p class="case-hero__lede">
+          We needed a credible public front door before we had client logos,
+          case studies, or a finished company around it. So we made the constraints
+          visible and treated the website as the first piece of proof.
+        </p>
+      </div>
+      <aside class="case-disclosure" aria-label="Project disclosure">
+        <strong>This is Drimini's own project.</strong>
+        <p>It demonstrates our decisions and implementation, not client outcomes.</p>
+      </aside>
+    </header>
+
+    <dl class="case-facts shell">
+      {projectFacts.map(([term, detail]) => (
+        <div>
+          <dt>{term}</dt>
+          <dd>{detail}</dd>
+        </div>
+      ))}
+    </dl>
+
+    <section class="case-section shell" aria-labelledby="case-constraint-title">
+      <div class="case-section__label">
+        <span>00</span>
+        <p>The constraint</p>
+      </div>
+      <div class="case-section__content">
+        <h2 id="case-constraint-title">Build trust without pretending trust already existed.</h2>
+        <p>
+          The primary reader is a CTO considering an external team for difficult
+          work. At launch, Drimini had no customer results, approved team roster,
+          service packages, or finished visual identity to lean on. The site had
+          to explain the offer clearly while refusing the usual shortcuts: fake
+          scale, decorative AI claims, invented proof, or a contact form that went
+          nowhere.
+        </p>
+      </div>
+    </section>
+
+    <section class="case-loop" aria-labelledby="case-loop-title">
+      <div class="shell">
+        <div class="case-loop__heading">
+          <p class="eyebrow">The working loop</p>
+          <h2 id="case-loop-title">Frame. Build. Harden.</h2>
+        </div>
+        <ol>
+          <li>
+            <span>01 / Frame</span>
+            <h3>Make the decision surface small.</h3>
+            <p>
+              We fixed one reader, one primary action, three capability areas,
+              and a direct voice. Static delivery, no analytics, and no CMS kept
+              the technical surface proportional to a small launch site.
+            </p>
+          </li>
+          <li>
+            <span>02 / Build</span>
+            <h3>Ship the whole path, not a facade.</h3>
+            <p>
+              Astro produces a JavaScript-free homepage. The contact route uses
+              a narrow same-origin function, Turnstile, server-side validation,
+              and D1 storage. A local authenticated command handles inbox review;
+              there is no public admin surface.
+            </p>
+          </li>
+          <li>
+            <span>03 / Harden</span>
+            <h3>Test the risks the site actually has.</h3>
+            <p>
+              The backend fails closed when storage or spam protection is missing.
+              Automated checks cover submission behavior, the inbox lifecycle,
+              narrow layouts, page weight, and WCAG 2.2 AA-detectable issues.
+              A human submission was exercised from receipt through permanent deletion.
+            </p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="case-section shell" aria-labelledby="case-decisions-title">
+      <div class="case-section__label">
+        <span>04</span>
+        <p>Decisions left visible</p>
+      </div>
+      <div class="case-section__content">
+        <h2 id="case-decisions-title">Small does not mean vague.</h2>
+        <div class="case-decision-grid">
+          <div>
+            <h3>No client-side application shell</h3>
+            <p>The homepage needs content and navigation, so it ships no browser JavaScript.</p>
+          </div>
+          <div>
+            <h3>No automatic email pipeline</h3>
+            <p>Enquiries land in D1. A person reviews them and replies through the existing mailbox.</p>
+          </div>
+          <div>
+            <h3>No public admin page</h3>
+            <p>Inbox access stays behind authenticated Cloudflare tooling instead of creating another attack surface.</p>
+          </div>
+          <div>
+            <h3>No invented maturity</h3>
+            <p>The provisional logo, missing client proof, and remaining company decisions stay labeled as such.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-outcome" aria-labelledby="case-outcome-title">
+      <div class="shell case-outcome__grid">
+        <div>
+          <p class="eyebrow">Current outcome</p>
+          <h2 id="case-outcome-title">A live, owned starting point.</h2>
+        </div>
+        <div>
+          <p>
+            The site is live at drimini.com. Its enquiry path has been verified
+            end to end, its operating routine has an owner, and its automated
+            behavior and accessibility checks run before release.
+          </p>
+          <p class="case-outcome__limit">
+            What this does not prove: client results, market demand, or how the
+            system behaves at a scale it has not reached. Those require future evidence.
+          </p>
+          <a class="button button--primary" href="/contact">Bring us your difficult bit <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+  </article>
+</BaseLayout>

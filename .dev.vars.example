@@ -1,0 +1,5 @@
+# Cloudflare's published always-pass secret is safe only for local development.
+TURNSTILE_SECRET_KEY=1x0000000000000000000000000000000AA
+
+# CONTACT_DB is a D1 binding, not a text environment variable. Configure it in
+# the Cloudflare Pages project or pass it to `wrangler pages dev`.

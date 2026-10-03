@@ -1,0 +1,79 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Privacy notice"
+  description="How Drimini handles information submitted through its project enquiry form."
+  bodyClass="privacy-page"
+>
+  <article class="legal-page shell">
+    <header>
+      <p class="eyebrow">Privacy notice</p>
+      <h1>What happens to your enquiry.</h1>
+      <p class="legal-page__updated">Last updated: 2 October 2026</p>
+    </header>
+
+    <section>
+      <h2>What we collect</h2>
+      <p>
+        The project enquiry form asks for your name, work email, company, and a
+        description of the work. Your role, approximate timeline, and approximate
+        budget are optional. Spam protection also processes limited technical
+        information about the submission.
+      </p>
+    </section>
+
+    <section>
+      <h2>Why we use it</h2>
+      <p>
+        Drimini uses this information to understand your request, decide whether
+        the work may be a fit, reply to you, and protect the form from abuse. We do
+        not use enquiry details for unrelated marketing or sell them.
+      </p>
+    </section>
+
+    <section>
+      <h2>Where it goes</h2>
+      <p>
+        Cloudflare processes the form, performs spam verification, and stores the
+        enquiry in a Drimini database hosted on Cloudflare D1. Drimini reviews
+        enquiries through Cloudflare's authenticated dashboard or an authenticated
+        local Wrangler session. If Drimini replies, the resulting email
+        conversation is handled through VK WorkSpace.
+      </p>
+    </section>
+
+    <section>
+      <h2>How long we keep it</h2>
+      <p>
+        Enquiries are kept only while we need them to respond, evaluate the
+        potential work, maintain the resulting business conversation, or meet an
+        applicable legal obligation. Enquiries that are no longer needed are
+        permanently deleted from D1. Archiving an enquiry is an organizational
+        step and does not delete it.
+      </p>
+    </section>
+
+    <section>
+      <h2>Your choices</h2>
+      <p>
+        You can ask Drimini to correct or delete an enquiry by emailing
+        contact@drimini.com, or by using the contact form and writing “Privacy
+        request” at the start of the project field. Your rights may vary with your
+        location and any applicable law.
+      </p>
+    </section>
+
+    <section>
+      <h2>Keep sensitive material out</h2>
+      <p>
+        Do not submit passwords, access tokens, production credentials, regulated
+        data, or other sensitive information. We can arrange an appropriate
+        channel later if a conversation requires it.
+      </p>
+    </section>
+
+    <a class="text-link" href="/contact">Return to contact <span aria-hidden="true">→</span></a>
+  </article>
+</BaseLayout>

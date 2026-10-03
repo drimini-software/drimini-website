@@ -1,0 +1,17 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Message not received"
+  description="The project enquiry could not be received."
+  bodyClass="contact-result-page"
+  noIndex
+>
+  <section class="contact-result shell" aria-labelledby="problem-title">
+    <p class="eyebrow">Submission problem</p>
+    <h1 id="problem-title">That message did not make it through.</h1>
+    <p>Please return to the form, check the required fields, and try again in a moment.</p>
+    <a class="button button--primary" href="/contact">Return to the form</a>
+  </section>
+</BaseLayout>

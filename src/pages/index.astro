@@ -1,0 +1,233 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const capabilities = [
+  {
+    number: "01",
+    title: "Custom software",
+    copy: "Focused digital products and internal tools shaped around the job—not a stack demo.",
+  },
+  {
+    number: "02",
+    title: "Systems",
+    copy: "Technical systems for important operational work, built with the depth their risk deserves.",
+  },
+  {
+    number: "03",
+    title: "Websites",
+    copy: "Purposeful web experiences where product thinking, visual craft, and engineering share a desk.",
+  },
+];
+
+const stages = [
+  {
+    label: "Frame",
+    copy: "Turn the difficult question into a defensible decision and an executable next step.",
+  },
+  {
+    label: "Build",
+    copy: "Ship a thin end-to-end slice early, learn from use, and expand toward the agreed outcome.",
+  },
+  {
+    label: "Harden",
+    copy: "Close the production gaps the actual risk justifies, then leave the client able to operate the result.",
+  },
+];
+---
+
+<BaseLayout
+  title="Drimini"
+  description="Drimini designs and builds custom software, technical systems, and websites with AI-native delivery and human ownership."
+>
+  <section class="hero shell" aria-labelledby="hero-title">
+    <div class="hero__copy">
+      <p class="eyebrow"><span>Independent software company</span><span>Founded 2026</span></p>
+      <h1 id="hero-title">Bring us the <em>difficult bit.</em></h1>
+      <p class="hero__lede">
+        Drimini designs and builds custom software, technical systems, and websites
+        for companies with an important outcome and a gap their current setup cannot close.
+      </p>
+      <div class="button-row">
+        <a class="button button--primary" href="/contact">Contact us <span aria-hidden="true">↗</span></a>
+        <a class="button button--text" href="#process">See how we work <span aria-hidden="true">↓</span></a>
+      </div>
+      <p class="hero__status">
+        <span class="status-dot" aria-hidden="true"></span>
+        Open to useful conversations
+      </p>
+    </div>
+
+    <div class="delivery-map" aria-label="Our delivery loop moves from an important outcome through frame, build, and harden to useful software.">
+      <div class="delivery-map__header">
+        <span>Working loop</span>
+        <span>Human owned</span>
+      </div>
+      <div class="delivery-map__input">
+        <span>Input</span>
+        <strong>An important outcome</strong>
+      </div>
+      <ol class="delivery-map__stages">
+        <li><span>01</span>Frame</li>
+        <li><span>02</span>Build</li>
+        <li><span>03</span>Harden</li>
+      </ol>
+      <div class="delivery-map__output">
+        <span>Output</span>
+        <strong>Useful software</strong>
+      </div>
+      <div class="delivery-map__splice" aria-hidden="true"><span></span><span></span></div>
+    </div>
+  </section>
+
+  <section class="capabilities section shell" id="work" aria-labelledby="work-title">
+    <div class="section-heading">
+      <p class="eyebrow">What we build</p>
+      <h2 id="work-title">Three useful areas.<br />No catalogue theatre.</h2>
+      <p>
+        The exact engagement follows the problem. These are the areas where we
+        start the conversation.
+      </p>
+    </div>
+
+    <div class="capability-grid">
+      {capabilities.map((capability) => (
+        <article class="capability-card">
+          <span class="capability-card__number">{capability.number}</span>
+          <h3>{capability.title}</h3>
+          <p>{capability.copy}</p>
+        </article>
+      ))}
+    </div>
+
+    <p class="range-note">
+      <span aria-hidden="true">＋</span>
+      There may be a credible fourth area. We are open to adjacent work when the
+      outcome is clear and the delivery path is honest.
+    </p>
+  </section>
+
+  <section class="problem section" aria-labelledby="problem-title">
+    <div class="shell problem__grid">
+      <div>
+        <p class="eyebrow">The difficult gap</p>
+        <h2 id="problem-title">The project matters. The current setup cannot carry it.</h2>
+      </div>
+      <div class="problem__copy">
+        <p>
+          Sometimes the constraint is capacity. Sometimes it is specialist range.
+          Sometimes a promising project has simply collected too many handoffs and
+          too little ownership.
+        </p>
+        <p>
+          Drimini is designed for that gap: a compact external team close enough to
+          the work to understand it, shape it, and stay accountable for what ships.
+        </p>
+        <ul class="signal-list" aria-label="Common engagement signals">
+          <li>Capacity</li>
+          <li>Specialist range</li>
+          <li>Execution gap</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="process section" id="process" aria-labelledby="process-title">
+    <div class="shell">
+      <div class="section-heading section-heading--light">
+        <p class="eyebrow">How we work</p>
+        <h2 id="process-title">Fast loops.<br />Visible judgment.</h2>
+        <p>
+          Frame, Build, and Harden can form one route or stand on their own. AI is
+          part of the everyday work loop; accountability for product choices,
+          quality, security, and release stays human.
+        </p>
+      </div>
+
+      <ol class="process-list">
+        {stages.map((stage, index) => (
+          <li>
+            <span class="process-list__number">0{index + 1}</span>
+            <h3>{stage.label}</h3>
+            <p>{stage.copy}</p>
+          </li>
+        ))}
+      </ol>
+
+      <div class="process-note">
+        <p>AI-native does not mean autopilot.</p>
+        <span>Agents accelerate the work. People own the outcome.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="work-preview section" aria-labelledby="work-preview-title">
+    <div class="shell work-preview__grid">
+      <div class="work-preview__intro">
+        <p class="eyebrow">Work we can show</p>
+        <h2 id="work-preview-title">Start with our own work.</h2>
+        <p>
+          Drimini is new. We will not dress an internal build up as a client
+          success story, but we can show the decisions and checks behind it.
+        </p>
+      </div>
+
+      <article class="work-card">
+        <div class="work-card__meta">
+          <span>Self-initiated</span>
+          <span>Live / 2026</span>
+        </div>
+        <h3>Drimini website and contact system</h3>
+        <p>
+          A fast, accessible company site with a real enquiry path, a deliberately
+          small runtime, and operational ownership after launch.
+        </p>
+        <ul class="work-card__facts" aria-label="Project highlights">
+          <li>Astro static site</li>
+          <li>Cloudflare Pages + D1</li>
+          <li>Automated accessibility checks</li>
+        </ul>
+        <a class="work-card__link" href="/work/drimini-website">
+          Read the case study <span aria-hidden="true">→</span>
+        </a>
+      </article>
+    </div>
+  </section>
+
+  <section class="fit section shell" id="fit" aria-labelledby="fit-title">
+    <div class="fit__intro">
+      <p class="eyebrow">Good fit</p>
+      <h2 id="fit-title">Small by design.<br />Serious about the work.</h2>
+      <p>
+        We are building Drimini for established companies that want direct access
+        to the people doing the thinking and making.
+      </p>
+    </div>
+
+    <div class="fit__details">
+      <p class="fit__label">A strong starting point</p>
+      <ul class="check-list">
+        <li>An important software, systems, or web outcome</li>
+        <li>A CTO or equivalent sponsor close to the decision</li>
+        <li>A real need for ownership, technical range, and fast learning</li>
+        <li>A company large enough for the work to matter, small enough to move</li>
+      </ul>
+      <p class="fit__aside">
+        Cybersecurity and the wider technology sector are areas we are especially
+        interested in exploring. We will claim specialist depth only when the
+        evidence exists.
+      </p>
+    </div>
+  </section>
+
+  <section class="contact-callout" aria-labelledby="contact-title">
+    <div class="shell contact-callout__inner">
+      <p class="eyebrow">Start with the gap</p>
+      <h2 id="contact-title">Have a difficult bit in view?</h2>
+      <p>
+        Give us the outcome, the difficult gap, and enough context to start a
+        useful conversation.
+      </p>
+      <a class="button button--dark" href="/contact">Contact us <span aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+</BaseLayout>
