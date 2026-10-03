@@ -1,4 +1,10 @@
-# Website
+# Drimini website
+
+[![CI](https://github.com/drimini-software/drimini-website/actions/workflows/ci.yml/badge.svg)](https://github.com/drimini-software/drimini-website/actions/workflows/ci.yml)
+
+Source for [drimini.com](https://drimini.com), Drimini's public website and
+project-enquiry intake. The repository is public to make the implementation and
+its limits inspectable; it is not a reusable Drimini brand template.
 
 Status: Deployed and production contact path verified at `https://drimini.com`
 Last reviewed: 2026-10-03
@@ -13,10 +19,9 @@ JavaScript; the contact route uses a small form helper, Cloudflare Turnstile,
 and a Cloudflare D1-backed enquiry inbox. Enquiries are reviewed through the
 authenticated Cloudflare D1 console or the local `pnpm inbox` command. There is
 no public admin route and no Cloudflare Zero Trust subscription dependency.
-The stack choice is recorded in `../decisions/2026-09-26-website-stack.md`, the
-information architecture is in `structure.md`, and provisional visual and copy
-choices are in `design-v1.md`. Deployment, inbox operation, failure handling,
-and rollback are in `RUNBOOK.md`.
+The information architecture is in `structure.md`, and provisional visual and
+copy choices are in `design-v1.md`. Deployment, inbox operation, failure
+handling, and rollback are in `RUNBOOK.md`.
 
 The Work section contains two deliberately labeled self-initiated projects. The
 website case study at `/work/drimini-website` explains verified operating
@@ -30,9 +35,6 @@ Versions are pinned in `package.json` and `pnpm-lock.yaml`. `drimini.com` is
 owned, added to Cloudflare, and configured as the site's canonical origin. The
 production build is deployed to Cloudflare Pages and the custom domain is active
 at `https://drimini.com`.
-The separate future DNS-only VPN hostname and VPN VPS are outside the website
-runtime; this boundary is recorded in
-`../decisions/2026-09-26-hosting-and-vpn-boundary.md`.
 
 ## Local setup
 
@@ -147,9 +149,8 @@ Cloudflare Pages Function validates submissions, verifies Turnstile, and stores
 the accepted fields in D1. There is no public review interface or admin API.
 The owner reviews and manages enquiries using the authenticated Cloudflare D1
 console or the narrow local `pnpm inbox` command. The implementation and
-data-flow decisions are recorded in
-`../decisions/2026-09-26-contact-intake.md` and
-`../decisions/2026-10-02-local-d1-enquiry-review.md`.
+data-flow boundary are documented in this repository and enforced by the
+same-origin Function, D1 binding, and authenticated local review path.
 
 The production channel is live and fails visibly; it never reports a message as
 received unless D1 accepts the insert. The successful human Turnstile and D1
@@ -192,5 +193,13 @@ The accessibility target is WCAG 2.2 AA. SEO uses semantic HTML, descriptive
 page titles and summaries, crawlable static output, and canonical URLs rooted at
 `https://drimini.com`. No analytics or other tracking should ship by default.
 
-Use `company/` and relevant files in `products/` as the factual source for
-website content. Never commit environment secrets.
+Public copy is maintained from Drimini's private company and product sources.
+Changes must not invent company facts, customers, results, pricing, or product
+status. Never commit environment secrets.
+
+## Licensing
+
+The software implementation is available under the Apache License 2.0. Drimini
+branding, visual-identity assets, and authored website copy are excluded from
+that grant. See `NOTICE` for the exact repository boundary. No trademark rights
+are granted.

@@ -1,0 +1,15 @@
+Drimini website licensing boundary
+
+The Apache License 2.0 in LICENSE applies to the software implementation,
+configuration, tests, and development tooling in this repository.
+
+It does not apply to:
+
+- the Drimini name, logo, marks, or visual identity;
+- images and identity assets under public/brand/ or public/favicon.svg; or
+- authored website copy displayed at drimini.com, including prose embedded in
+  source page files.
+
+Those excluded materials are made visible for inspection. No permission to
+reuse them is granted except where applicable law independently permits it.
+The Apache License 2.0 does not grant trademark rights.

@@ -63,6 +63,10 @@ test("the work pages distinguish self-initiated proof from client outcomes", asy
     "content",
     "https://drimini.com/brand/drimini-website-case-study-og.png",
   );
+  await expect(page.getByRole("link", { name: "View source on GitHub" })).toHaveAttribute(
+    "href",
+    "https://github.com/drimini-software/drimini-website",
+  );
 });
 
 test("Release Evidence is presented as experimental work", async ({ page }) => {
