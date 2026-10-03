@@ -25,9 +25,9 @@ testimonials, team profiles, or partner logos.
 | `/contact` | Collect a focused project enquiry and report delivery state | Build now |
 | `404` | Recover visitors with one clear route home | Build now |
 | `/privacy` | Explain form collection, use, retention, and visitor choices | Build now |
-| `/work` | Index verified, honestly labeled work | Published; second project prepared locally |
+| `/work` | Index verified, honestly labeled work | Published with two self-initiated projects |
 | `/work/drimini-website` | Explain the decisions and evidence behind Drimini's website | Published |
-| `/work/release-evidence` | Present the experimental source preview and its limits | Prepared locally |
+| `/work/release-evidence` | Present the experimental source preview and its limits | Published |
 
 Do not create empty About, Team, Services, Careers, Blog, or Work pages to make
 the company appear larger. Add a route when it has useful, verified content.

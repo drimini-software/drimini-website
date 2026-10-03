@@ -97,8 +97,9 @@ Current Cloudflare state verified on 2026-10-03:
 - production and preview Functions are configured to fail closed;
 - `https://drimini.com`, `/contact/`, and `/privacy/` return the production
   pages with the expected canonical metadata and security headers;
-- `/work/`, `/work/drimini-website/`, and both Open Graph images are live on
-  the custom domain with their expected disclosure and sharing metadata;
+- `/work/`, `/work/drimini-website/`, `/work/release-evidence/`, and all three
+  Open Graph images are live on the custom domain with their expected
+  disclosure and sharing metadata;
 - the live contact endpoint rejects an invalid Turnstile token with HTTP 400,
   and the remote D1 inbox remains empty after that check;
 - a labeled human submission was stored once, inspected, marked read, archived,
