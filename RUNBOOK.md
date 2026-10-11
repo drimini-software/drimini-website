@@ -144,11 +144,55 @@ trusted connection. Fix the cause or roll back a faulty deployment, then rerun.
 Do not lower expected headers or disable certificate verification to obtain a
 passing report.
 
-The live production run passed all 13 checks on 2026-10-11. This is a point-in-time
-check. Scheduling, alert delivery, and observation of actual storage failures
-remain unconfigured; the command does not complete those operating decisions.
-Its regression tests run in the existing local and hosted test suite without
-requesting the production site.
+The live production run passed all 13 checks on 2026-10-11. Each report remains
+a point-in-time check. The separate workflow below schedules repeat runs after
+publication; alert delivery and observation of actual storage failures remain
+unconfigured. Regression tests run in the existing local and hosted test suite
+without requesting the production site.
+
+## Scheduled public checks
+
+`.github/workflows/health.yml` defines **Website health**. Publishing it to
+the official repository's `main` branch enables the schedule at 00:17, 06:17,
+12:17, and 18:17 UTC. Changes to the workflow, Node version, health scripts, or
+declared headers also trigger a check on `main`. For a check after manual Pages
+deployment, use **Actions → Website health → Run workflow**, choosing `main`.
+Forks and other branches skip the job. The workflow does not deploy the site.
+
+The job runs `node scripts/health-actions.mjs` with a fixed production target
+and no arguments, Cloudflare secrets, dependency installation, or account
+access. The runner retains `.cache/health/website-health.json` and
+`.cache/health/website-health.txt` and writes an escaped job summary. It clears
+only those generated reports before a new attempt to avoid showing stale results
+after startup failure. Its exit code preserves failed probes; report or summary
+write errors also fail the run.
+
+The final upload step runs even after failure and retains only those two files
+for 14 days. It uses a run/attempt-specific artifact name and fails if no report
+files exist. Artifacts and logs contain public probe metadata, with no enquiry
+data, raw response bodies, or credentials. The hidden-files option applies to
+the explicit report paths only. Official actions are pinned to immutable commits.
+
+When a job fails:
+
+1. Read the **Website health** summary and probe step log. If startup, report
+   writing, or artifact upload failed, distinguish that failure from failed site
+   probes. A missing report is not evidence that the website is down.
+2. Download the run's `website-health-<run-id>-<attempt>` artifact and inspect
+   the failed check IDs and reasons. Use the public-route failure guidance above.
+3. If the checked source expectations changed before the manual Pages deployment,
+   inspect the source/deployment mismatch rather than weakening the checker.
+4. Fix the cause, deploy or roll back when appropriate, then run the workflow
+   again on `main`. Avoid bursts against the contact route.
+
+Always check when the last run actually finished. GitHub may delay or drop
+scheduled runs under load and disables schedules in public repositories after
+60 days without activity. Re-enable a disabled workflow and verify a new run;
+do not assume that an old passing badge means a recent probe occurred. See
+GitHub's [schedule documentation](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule).
+The schedule provides repeated public-route observation; email, chat, and other
+alert delivery have not been configured or verified. Successful Turnstile and
+D1 operation still need the separate contact lifecycle check.
 
 ## Routine enquiry operation
 

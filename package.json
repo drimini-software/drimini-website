@@ -19,7 +19,7 @@
     "inbox": "node scripts/inbox.mjs",
     "health": "node scripts/health.mjs",
     "test": "pnpm build:test && pnpm test:functions && playwright test",
-    "test:functions": "node --test tests/contact-function.test.mjs tests/inbox-cli.test.mjs tests/health.test.mjs",
+    "test:functions": "node --test tests/contact-function.test.mjs tests/inbox-cli.test.mjs tests/health.test.mjs tests/health-actions.test.mjs",
     "test:e2e": "playwright test"
   },
   "dependencies": {

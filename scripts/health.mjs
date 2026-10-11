@@ -21,7 +21,7 @@ existing handler rejects before spam verification or storage. No enquiry is
 submitted. This does not verify successful Turnstile or D1 operation.
 
 Exit codes: 0 checks passed; 1 checks failed; 2 invalid arguments.
-This is a single run; scheduling and alerts are not configured.`;
+This command runs once. Scheduling and alerts are managed separately.`;
 
 export function parseHealthArguments(args) {
   const options = { origin: canonicalOrigin, timeoutMs: defaultTimeoutMs, json: false, help: false };
@@ -224,7 +224,7 @@ export async function checkWebsite({ origin = canonicalOrigin, timeoutMs = defau
     schema_version: "1", checked_at: new Date().toISOString(), origin,
     ok: results.every((result) => result.outcome === "passed"), checks: results,
     scope: [
-      "Single public-route smoke check; no scheduling or alerts configured.",
+      "Single public-route smoke check; scheduling and alerts are managed separately.",
       "Contact rejection only; successful Turnstile verification and D1 storage are not checked.",
       ...(origin === canonicalOrigin ? [] : ["Production www redirects skipped for a custom origin."]),
     ],

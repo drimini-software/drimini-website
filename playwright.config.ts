@@ -2,7 +2,8 @@ import { defineConfig, devices } from "@playwright/test";
 
 export default defineConfig({
   testDir: "./tests",
-  testIgnore: ["**/*-function.test.mjs", "**/inbox-cli.test.mjs", "**/health.test.mjs"],
+  // Node Function and CLI tests run through test:functions, not Playwright.
+  testIgnore: ["**/*.test.mjs"],
   fullyParallel: false,
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 2 : 0,

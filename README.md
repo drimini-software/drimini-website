@@ -1,6 +1,7 @@
 # Drimini website
 
 [![CI](https://github.com/drimini-software/drimini-website/actions/workflows/ci.yml/badge.svg)](https://github.com/drimini-software/drimini-website/actions/workflows/ci.yml)
+[![Website health](https://github.com/drimini-software/drimini-website/actions/workflows/health.yml/badge.svg)](https://github.com/drimini-software/drimini-website/actions/workflows/health.yml)
 
 Source for [drimini.com](https://drimini.com), Drimini's public website and
 project-enquiry intake. The repository is public to make the implementation and
@@ -156,7 +157,8 @@ The contact probe sends one empty POST with no Origin or enquiry fields. The
 existing Function rejects it with HTTP 403 before parsing fields, verifying
 Turnstile, or writing to D1. It checks rejection and routing; successful spam
 verification and enquiry storage still need the separate release verification
-in `RUNBOOK.md`. This command configures no schedule or alerts.
+in `RUNBOOK.md`. The command runs once; scheduling is handled by the separate
+workflow below.
 
 No credentials or Cloudflare account access are needed. Requests omit
 credentials, do not follow redirects, run at most three concurrently, and read
@@ -170,6 +172,33 @@ All 13 production checks passed on 2026-10-11. This does not refresh the
 2026-10-03 verification of successful contact storage or account configuration.
 Generated reports may be kept under ignored `.cache/`; do not add enquiry data
 or credentials to them.
+
+### Scheduled checks
+
+The `Website health` workflow in `.github/workflows/health.yml` runs the same
+13 public probes at 00:17, 06:17, 12:17, and 18:17 UTC, on relevant health-tooling
+pushes to `main`, and through **Actions → Website health → Run workflow**.
+Only `drimini-software/drimini-website` on `main` can run the probing job; forks
+and other branches skip it. Publication to `main` is required to activate it.
+
+The workflow uses Node.js from `.node-version`, with no dependency installation
+or production credentials. Official actions are pinned to exact commits; the
+GitHub token has only `contents: read`, and checkout does not persist credentials.
+Runs are serialized and have a five-minute job limit.
+
+The job summary and log show each check. JSON and text reports are uploaded as
+a run-specific `website-health-<run-id>-<attempt>` artifact, retained for
+14 days even when probes fail. The artifact step includes only the two named
+report files. A failed probe, report/summary write, or missing artifact fails
+the job. A startup failure may leave no report; inspect its log before drawing
+a conclusion about the site.
+
+Scheduled runs can be delayed or dropped, and public repositories lose their
+schedule after 60 days without activity. Check the latest run timestamp as well
+as its result; a stale passing badge does not establish current availability.
+See GitHub's [schedule documentation](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule).
+Failure status is visible in Actions. Alert delivery and observation of actual
+contact-storage failures remain separate operating decisions.
 
 ## Offer and audience
 
@@ -193,8 +222,9 @@ same-origin Function, D1 binding, and authenticated local review path.
 
 The production channel is live and fails visibly; it never reports a message as
 received unless D1 accepts the insert. The successful human Turnstile and D1
-lifecycle check is complete. Release operations still require failure
-observation. Free-plan limits are hard service limits rather than
+lifecycle check is complete. Release operations still require observation of
+actual contact-storage failures and verified alert delivery. Free-plan limits
+are hard service limits rather than
 permission to bill overages: if a relevant daily limit is exhausted, the contact
 endpoint fails until Cloudflare resets it. Static pages remain available.
 
@@ -224,7 +254,7 @@ not leak recipient or infrastructure details.
 - final logo assets, brand color tokens, and typography;
 - performance budgets after the visual assets are known;
 - analytics, if a measured need and privacy approach justify it;
-- production failure monitoring configuration;
+- alert delivery and monitoring of successful contact storage and its failures;
 - legal review and final controller details for the privacy notice once the
   company structure and jurisdiction are known.
 

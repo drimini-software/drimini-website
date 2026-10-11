@@ -1,0 +1,55 @@
+name: Website health
+
+on:
+  schedule:
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/health.yml'
+      - '.node-version'
+      - 'scripts/health*.mjs'
+      - 'public/_headers'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: website-health-production
+  cancel-in-progress: false
+
+jobs:
+  health:
+    # Forks and other branches must not probe Drimini's production site.
+    if: github.repository == 'drimini-software/drimini-website' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .node-version
+          package-manager-cache: false
+
+      - name: Check production website
+        run: node scripts/health-actions.mjs
+
+      - name: Retain health reports
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: website-health-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            .cache/health/website-health.json
+            .cache/health/website-health.txt
+          # Only the two explicit generated files above are included.
+          include-hidden-files: true
+          archive: true
+          if-no-files-found: error
+          retention-days: 14
