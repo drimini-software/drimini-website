@@ -1,7 +1,7 @@
 # Website operations runbook
 
 Status: Production; contact path verified
-Last reviewed: 2026-10-03
+Last reviewed: 2026-10-11
 Operational owner: Founder (name TBD)
 
 This runbook covers the public Cloudflare Pages site and the contact-form D1
@@ -93,7 +93,10 @@ pnpm test
 
 After deployment:
 
-1. Confirm `/`, `/contact`, and `/privacy` return the intended production pages.
+1. Run `pnpm health` and require a passing report for deployed pages, headers,
+   sharing images, the 404 route, contact rejection, and permanent `www`
+   redirects. For a preview, use `pnpm health --origin <preview-origin>`;
+   production redirects are explicitly skipped.
 2. Submit one clearly labeled test enquiry through the public form.
 3. Run `pnpm inbox list`, then `pnpm inbox show <id>`, and confirm the row has
    the expected fields but no stored IP address, user agent, or Turnstile token.
@@ -104,6 +107,48 @@ After deployment:
 7. Verify production security headers and the permanent `www` redirect.
 
 Do not use a real prospective client's details for the release test.
+
+## Public-route smoke checks
+
+Run `pnpm health` after deployment or while investigating an availability or
+routing problem. It requires no account access and submits no enquiry: its
+single empty contact POST omits Origin, so the Function rejects it before spam
+verification or storage. All other probes are GET requests. It does not verify
+successful Turnstile verification, the D1 binding, quotas, migrations, or inbox
+availability. A passing report does not replace the contact lifecycle check.
+
+Use `pnpm --silent health --json` for machine-readable results. To retain a
+local report in PowerShell:
+
+```powershell
+New-Item -ItemType Directory -Force .cache | Out-Null
+pnpm --silent health --json | Set-Content -Encoding UTF8 .cache/health.json
+$healthExit = $LASTEXITCODE
+# Inspect health.json and the native exit code before treating the run as passed.
+$healthExit
+```
+
+Use `pnpm.cmd` if PowerShell execution policy prevents running `pnpm.ps1`.
+Exit code `1` means a check failed; `2` means invalid arguments. The default
+timeout is 8000 ms per request; `--timeout-ms 12000` allows a longer connection
+budget without weakening HTTPS verification. Responses are limited to 2 MiB
+and three requests run concurrently. Redirects are inspected without following
+their destinations. Do not run bursts against the rate-limited contact route.
+
+On failure, use the reported check ID and reason to inspect the corresponding
+route, Pages deployment, `public/_headers`, or zone redirect rule. An unexpected
+contact response can mean the Function route is missing or rate-limited; inspect
+logs and edge status before changing its rejection behavior. A network or
+timeout failure can be local to the checking machine; compare with a separate
+trusted connection. Fix the cause or roll back a faulty deployment, then rerun.
+Do not lower expected headers or disable certificate verification to obtain a
+passing report.
+
+The live production run passed all 13 checks on 2026-10-11. This is a point-in-time
+check. Scheduling, alert delivery, and observation of actual storage failures
+remain unconfigured; the command does not complete those operating decisions.
+Its regression tests run in the existing local and hosted test suite without
+requesting the production site.
 
 ## Routine enquiry operation
 

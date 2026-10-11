@@ -7,7 +7,7 @@ project-enquiry intake. The repository is public to make the implementation and
 its limits inspectable; it is not a reusable Drimini brand template.
 
 Status: Deployed and production contact path verified at `https://drimini.com`
-Last reviewed: 2026-10-03
+Last reviewed: 2026-10-11
 
 This directory contains the Drimini website application. The website is the
 company's first project and should serve as early evidence of its AI-native,
@@ -125,12 +125,51 @@ Current Cloudflare state verified on 2026-10-03:
 - `pnpm check` — run Astro and TypeScript diagnostics;
 - `pnpm check:functions` — compile the Pages Functions with Wrangler;
 - `pnpm assets:social` — rebuild the deterministic 1200 by 630 sharing cards;
-- `pnpm test:functions` — run server-side validation and delivery unit tests;
+- `pnpm test:functions` — run Function and operations CLI unit tests;
+- `pnpm health` — check deployed public routes without submitting an enquiry;
+- `pnpm health --help` — show health options, scope, and exit codes;
 - `pnpm inbox list` — list open enquiries in the remote D1 database through
   the authenticated Wrangler session;
 - `pnpm inbox --help` — show the available review and deletion commands;
 - `pnpm test` — build, then run function, behavior, and accessibility tests;
 - `pnpm test:e2e` — run Playwright against an existing current `dist/` build.
+
+## Deployed website checks
+
+From this directory, run:
+
+```powershell
+pnpm health
+pnpm --silent health --json
+pnpm health --origin https://drimini-website.pages.dev --timeout-ms 12000
+```
+
+The production run checks six pages for their status, title, English language,
+canonical URL, indexing metadata, sharing-image metadata, and the global headers
+declared in `public/_headers`. It also checks the three sharing-image files for
+PNG headers and 1200 by 630 dimensions, the non-indexable 404 page, contact
+rejection, and HTTP/HTTPS `www` redirects preserving path and query. A custom
+origin uses the same page expectations and production canonicals but explicitly
+skips the two production `www` checks.
+
+The contact probe sends one empty POST with no Origin or enquiry fields. The
+existing Function rejects it with HTTP 403 before parsing fields, verifying
+Turnstile, or writing to D1. It checks rejection and routing; successful spam
+verification and enquiry storage still need the separate release verification
+in `RUNBOOK.md`. This command configures no schedule or alerts.
+
+No credentials or Cloudflare account access are needed. Requests omit
+credentials, do not follow redirects, run at most three concurrently, and read
+at most 2 MiB each. Each request has an 8-second timeout, adjustable from 100 to
+30000 milliseconds. Exit codes are `0` for all checks passed, `1` for any check
+failed, and `2` for invalid arguments. JSON reports contain a schema version,
+UTC timestamp, target, per-check results, and scope. Use `--silent` with pnpm to
+keep its command banner out of machine-readable output.
+
+All 13 production checks passed on 2026-10-11. This does not refresh the
+2026-10-03 verification of successful contact storage or account configuration.
+Generated reports may be kept under ignored `.cache/`; do not add enquiry data
+or credentials to them.
 
 ## Offer and audience
 

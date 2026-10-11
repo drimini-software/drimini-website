@@ -2,7 +2,7 @@ import { defineConfig, devices } from "@playwright/test";
 
 export default defineConfig({
   testDir: "./tests",
-  testIgnore: ["**/*-function.test.mjs", "**/inbox-cli.test.mjs"],
+  testIgnore: ["**/*-function.test.mjs", "**/inbox-cli.test.mjs", "**/health.test.mjs"],
   fullyParallel: false,
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 2 : 0,
